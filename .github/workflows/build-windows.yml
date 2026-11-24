@@ -13,7 +13,6 @@ on:
         default: false
 
 env: 
-  RUST_BACKTRACE: full
   CARGO_TERM_COLOR: always
 
   CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_RUSTFLAGS: "-C target-feature=+crt-static -C target-cpu=x86-64-v3"
