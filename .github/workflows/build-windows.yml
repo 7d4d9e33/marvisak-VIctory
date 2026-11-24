@@ -1,4 +1,4 @@
-name: Build Artifact (Windows)
+name: Build App (Windows)
 
 on:
   push:
@@ -64,9 +64,9 @@ jobs:
           cargo clean
 
           if [ "${{ matrix.profile }}" = "release" ]; then
-            cargo build --workspace --release --locked --target ${{ matrix.target }}
+            cargo build --release --locked --target ${{ matrix.target }} -p victory
           elif [ "${{ matrix.profile }}" = "debug" ]; then
-            cargo build --target --locked ${{ matrix.target }}
+            cargo build --target --locked ${{ matrix.target }} -p victory
           else
             echo "Unknown build profile! ${{ matrix.profile }}"
             exit 1
