@@ -8,6 +8,9 @@ on:
       skip-debug-build:
         type: boolean
         default: false
+      skip-diag-build:
+        type: boolean
+        default: false
 
 env: 
   RUST_BACKTRACE: full
@@ -32,6 +35,9 @@ jobs:
           BUILD_PROFILES=$(jq -c '. + ["release"]' <<< "$BUILD_PROFILES")
           if [[ "${{ inputs.skip-debug-build }}" == "false" ]]; then
             BUILD_PROFILES=$(jq -c '. + ["debug"]' <<< "$BUILD_PROFILES")
+          fi
+          if [[ "${{ inputs.skip-diag-build }}" == "false" ]]; then
+            BUILD_PROFILES=$(jq -c '. + ["diag"]' <<< "$BUILD_PROFILES")
           fi
           jq 'if length == 0 then error("array is empty") else . end' <<< "$BUILD_PROFILES"
           echo "BUILD_PROFILES=$BUILD_PROFILES" >> "$GITHUB_OUTPUT"
@@ -64,7 +70,9 @@ jobs:
           cargo clean
 
           if [ "${{ matrix.profile }}" = "release" ]; then
-            cargo build --release --locked --target ${{ matrix.target }} -p victory
+            cargo build --locked --release --target ${{ matrix.target }} -p victory
+          elif [ "${{ matrix.profile }}" = "diag" ]; then
+            cargo build -locked --profile diag --target ${{ matrix.target } -p victory --features diagnostics
           elif [ "${{ matrix.profile }}" = "debug" ]; then
             cargo build --locked --target ${{ matrix.target }} -p victory
           else
