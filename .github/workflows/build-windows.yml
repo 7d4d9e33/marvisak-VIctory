@@ -87,5 +87,6 @@ jobs:
             target/${{ matrix.target }}/release/victory.exe
             target/${{ matrix.target }}/diag/victory.exe
             target/${{ matrix.target }}/debug/victory.exe
+            victory.example.toml
           compression-level: 9
           if-no-files-found: error
