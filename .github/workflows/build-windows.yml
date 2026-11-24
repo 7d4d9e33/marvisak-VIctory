@@ -72,7 +72,7 @@ jobs:
           if [ "${{ matrix.profile }}" = "release" ]; then
             cargo build --locked --release --target ${{ matrix.target }} -p victory
           elif [ "${{ matrix.profile }}" = "diag" ]; then
-            cargo build -locked --profile diag --target ${{ matrix.target } -p victory --features diagnostics
+            cargo build --locked --profile diag --target ${{ matrix.target } -p victory --features diagnostics
           elif [ "${{ matrix.profile }}" = "debug" ]; then
             cargo build --locked --target ${{ matrix.target }} -p victory
           else
