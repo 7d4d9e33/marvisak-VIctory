@@ -66,7 +66,7 @@ jobs:
           if [ "${{ matrix.profile }}" = "release" ]; then
             cargo build --release --locked --target ${{ matrix.target }} -p victory
           elif [ "${{ matrix.profile }}" = "debug" ]; then
-            cargo build --target --locked ${{ matrix.target }} -p victory
+            cargo build --locked --target ${{ matrix.target }} -p victory
           else
             echo "Unknown build profile! ${{ matrix.profile }}"
             exit 1
