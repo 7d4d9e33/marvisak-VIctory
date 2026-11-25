@@ -65,8 +65,6 @@ jobs:
       - name: Build
         shell: bash
         run: |
-          cargo clean
-
           if [ "${{ matrix.profile }}" = "release" ]; then
             cargo build --locked --release --target ${{ matrix.target }} -p victory
           elif [ "${{ matrix.profile }}" = "diag" ]; then
